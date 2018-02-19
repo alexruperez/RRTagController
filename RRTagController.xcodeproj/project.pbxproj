@@ -39,9 +39,9 @@
 		BB8A0A841A97804700E278A0 /* RRTagControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RRTagControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB8A0A891A97804700E278A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB8A0A8A1A97804700E278A0 /* RRTagControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RRTagControllerTests.swift; sourceTree = "<group>"; };
-		BB8A0A941A97806300E278A0 /* RRTagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRTagController.swift; sourceTree = "<group>"; };
-		BB8A0A961A9785DE00E278A0 /* RRTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRTagCollectionViewCell.swift; sourceTree = "<group>"; };
-		BB8A0A981A97E99C00E278A0 /* RRAddTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRAddTagView.swift; sourceTree = "<group>"; };
+		BB8A0A941A97806300E278A0 /* RRTagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RRTagController.swift; path = ../source/RRTagController.swift; sourceTree = "<group>"; };
+		BB8A0A961A9785DE00E278A0 /* RRTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RRTagCollectionViewCell.swift; path = ../source/RRTagCollectionViewCell.swift; sourceTree = "<group>"; };
+		BB8A0A981A97E99C00E278A0 /* RRAddTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RRAddTagView.swift; path = ../source/RRAddTagView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,7 +314,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -359,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
