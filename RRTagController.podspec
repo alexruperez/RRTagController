@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'RRTagController'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'RRTagController allows user to select tag and create new one.'
 
   s.homepage         = 'https://github.com/alexruperez/RRTagController'

@@ -9,9 +9,9 @@
 import UIKit
 
 public struct Tag {
-    var isSelected: Bool
-    var isLocked: Bool
-    var textContent: String
+    public var isSelected: Bool
+    public var isLocked: Bool
+    public var textContent: String
 }
 
 let colorUnselectedTag = UIColor.white
@@ -22,6 +22,9 @@ let colorTextSelectedTag = UIColor.white
 
 public class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    public typealias BlockFinish = (_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void
+    public typealias BlockCancel = () -> Void
+
     fileprivate var tags = [Tag]()
     fileprivate var navigationBarItem: UINavigationItem!
     fileprivate var leftButton: UIBarButtonItem!
@@ -30,8 +33,8 @@ public class RRTagController: UIViewController, UICollectionViewDelegate, UIColl
     fileprivate let addTagView = RRAddTagView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 64))
     fileprivate var heightKeyboard: CGFloat = 0
     
-    var blockFinish: ((_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void)!
-    var blockCancel: (() -> Void)!
+    var blockFinish: BlockFinish!
+    var blockCancel: BlockCancel?
 
     public var totalTagsSelected: Int {
         get {
@@ -121,7 +124,7 @@ public class RRTagController: UIViewController, UICollectionViewDelegate, UIColl
     
     @objc func cancelTagController() {
         self.dismiss(animated: true) {
-            self.blockCancel()
+            self.blockCancel?()
         }
     }
     
@@ -278,8 +281,10 @@ public class RRTagController: UIViewController, UICollectionViewDelegate, UIColl
         NotificationCenter.default.addObserver(self, selector: #selector(RRTagController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    public class func displayTagController(_ parentController: UIViewController, tagsString: [String]?,
-                                           blockFinish: @escaping (_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void, blockCancel: (() -> Void)? = nil) {
+    public class func displayTagController(_ parentController: UIViewController,
+                                           tagsString: [String]?,
+                                           blockFinish: @escaping BlockFinish,
+                                           blockCancel: BlockCancel?) {
         let tagController = RRTagController()
         tagController.tags = []
         if tagsString != nil {
@@ -292,8 +297,10 @@ public class RRTagController: UIViewController, UICollectionViewDelegate, UIColl
         parentController.present(tagController, animated: true, completion: nil)
     }
 
-    public class func displayTagController(_ parentController: UIViewController, tags: [Tag]?,
-                                           blockFinish: @escaping (_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void, blockCancel: (() -> Void)? = nil) {
+    public class func displayTagController(_ parentController: UIViewController,
+                                           tags: [Tag]?,
+                                           blockFinish: @escaping BlockFinish,
+                                           blockCancel: BlockCancel?) {
         let tagController = RRTagController()
         tagController.tags = tags ?? []
         tagController.blockCancel = blockCancel
