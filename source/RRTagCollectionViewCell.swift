@@ -10,11 +10,11 @@ import UIKit
 
 let RRTagCollectionViewCellIdentifier = "RRTagCollectionViewCellIdentifier"
 
-class RRTagCollectionViewCell: UICollectionViewCell {
+public class RRTagCollectionViewCell: UICollectionViewCell {
     
-    var cellSelected: Bool = false
+    public var cellSelected: Bool = false
     
-    lazy var textContent: UILabel! = {
+    public lazy var textContent: UILabel! = {
         let textContent = UILabel(frame: CGRect.zero)
         textContent.layer.masksToBounds = true
         textContent.layer.cornerRadius = 20
@@ -25,7 +25,7 @@ class RRTagCollectionViewCell: UICollectionViewCell {
         return textContent
     }()
     
-    func initContent(_ tag: Tag) {
+    public func initContent(_ tag: Tag) {
         self.contentView.addSubview(textContent)
         textContent.text = tag.textContent
         textContent.sizeToFit()
@@ -37,7 +37,7 @@ class RRTagCollectionViewCell: UICollectionViewCell {
         self.textContent.textColor = (cellSelected == true) ? colorTextSelectedTag : colorTextUnSelectedTag
     }
     
-    func initAddButtonContent() {
+    public func initAddButtonContent() {
         self.contentView.addSubview(textContent)
         textContent.text = "+"
         textContent.sizeToFit()
@@ -47,7 +47,7 @@ class RRTagCollectionViewCell: UICollectionViewCell {
         self.textContent.textColor = UIColor.white
     }
     
-    func animateSelection(_ selection: Bool) {
+    public func animateSelection(_ selection: Bool) {
         cellSelected = selection
     
         self.textContent.frame.size = CGSize(width: self.textContent.frame.size.width - 20, height: self.textContent.frame.size.height - 20)
@@ -60,7 +60,7 @@ class RRTagCollectionViewCell: UICollectionViewCell {
         }, completion: nil)
     }
     
-    class func contentHeight(_ content: String) -> CGSize {
+    public class func contentHeight(_ content: String) -> CGSize {
         let styleText = NSMutableParagraphStyle()
         styleText.alignment = NSTextAlignment.center
         let attributs = [NSAttributedStringKey.paragraphStyle:styleText, NSAttributedStringKey.font:UIFont.boldSystemFont(ofSize: 17)]

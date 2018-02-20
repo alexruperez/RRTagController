@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Tag {
+public struct Tag {
     var isSelected: Bool
     var isLocked: Bool
     var textContent: String
@@ -20,7 +20,7 @@ let colorSelectedTag = UIColor(red:0.22, green:0.7, blue:0.99, alpha:1)
 let colorTextUnSelectedTag = UIColor(red:0.33, green:0.33, blue:0.35, alpha:1)
 let colorTextSelectedTag = UIColor.white
 
-class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+public class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     fileprivate var tags = [Tag]()
     fileprivate var navigationBarItem: UINavigationItem!
@@ -33,7 +33,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
     var blockFinish: ((_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void)!
     var blockCancel: (() -> Void)!
 
-    var totalTagsSelected: Int {
+    public var totalTagsSelected: Int {
         get {
             return _totalTagsSelected
         }
@@ -55,7 +55,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     
-    lazy var collectionTag: UICollectionView = {
+    public lazy var collectionTag: UICollectionView = {
         let layoutCollectionView = UICollectionViewFlowLayout()
         layoutCollectionView.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         layoutCollectionView.itemSize = CGSize(width: 90, height: 20)
@@ -70,7 +70,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         return collectionTag
     }()
     
-    lazy var addNewTagCell: RRTagCollectionViewCell = {
+    public lazy var addNewTagCell: RRTagCollectionViewCell = {
         let addNewTagCell = RRTagCollectionViewCell()
         addNewTagCell.contentView.addSubview(addNewTagCell.textContent)
         addNewTagCell.textContent.text = "+"
@@ -79,7 +79,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         return addNewTagCell
     }()
     
-    lazy var controlPanelEdition: UIView = {
+    public lazy var controlPanelEdition: UIView = {
         let controlPanel = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.size.height + 50, width: UIScreen.main.bounds.size.width, height: 50))
         controlPanel.backgroundColor = .white
         
@@ -108,7 +108,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         return controlPanel
     }()
 
-    lazy var navigationBar: UINavigationBar = {
+    public lazy var navigationBar: UINavigationBar = {
         let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 64))
         
         self.navigationBarItem = UINavigationItem(title: "Tags")
@@ -162,11 +162,11 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         cancelEditTag()
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tags.count + 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize {
             if indexPath.row < tags.count {
                 return RRTagCollectionViewCell.contentHeight(tags[indexPath.row].textContent)
@@ -174,7 +174,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
             return CGSize(width: 40, height: 40)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCell: RRTagCollectionViewCell? = collectionView.cellForItem(at: indexPath) as? RRTagCollectionViewCell
         
         if indexPath.row < tags.count {
@@ -205,7 +205,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: RRTagCollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: RRTagCollectionViewCellIdentifier, for: indexPath) as? RRTagCollectionViewCell
         
         if indexPath.row < tags.count {
@@ -236,11 +236,11 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         heightKeyboard = 0
     }
 
-    override var prefersStatusBarHidden: Bool {
+    public override var prefersStatusBarHidden: Bool {
         return true
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
 
@@ -278,7 +278,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         NotificationCenter.default.addObserver(self, selector: #selector(RRTagController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    class func displayTagController(_ parentController: UIViewController, _ tagsString: [String]?,
+    public class func displayTagController(_ parentController: UIViewController, _ tagsString: [String]?,
         blockFinish: @escaping (_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void, blockCancel: @escaping () -> Void) {
         let tagController = RRTagController()
         tagController.tags = []
@@ -292,7 +292,7 @@ class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionV
         parentController.present(tagController, animated: true, completion: nil)
     }
 
-    class func displayTagController(_ parentController: UIViewController, _ tags: [Tag]?,
+    public class func displayTagController(_ parentController: UIViewController, _ tags: [Tag]?,
         blockFinish: @escaping (_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void, blockCancel: @escaping () -> Void) {
         let tagController = RRTagController()
         tagController.tags = tags ?? []
