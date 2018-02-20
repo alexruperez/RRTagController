@@ -278,8 +278,8 @@ public class RRTagController: UIViewController, UICollectionViewDelegate, UIColl
         NotificationCenter.default.addObserver(self, selector: #selector(RRTagController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    public class func displayTagController(_ parentController: UIViewController, _ tagsString: [String]?,
-        blockFinish: @escaping (_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void, blockCancel: @escaping () -> Void) {
+    public class func displayTagController(_ parentController: UIViewController, tagsString: [String]?,
+                                           blockFinish: @escaping (_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void, blockCancel: (() -> Void)? = nil) {
         let tagController = RRTagController()
         tagController.tags = []
         if tagsString != nil {
@@ -292,8 +292,8 @@ public class RRTagController: UIViewController, UICollectionViewDelegate, UIColl
         parentController.present(tagController, animated: true, completion: nil)
     }
 
-    public class func displayTagController(_ parentController: UIViewController, _ tags: [Tag]?,
-        blockFinish: @escaping (_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void, blockCancel: @escaping () -> Void) {
+    public class func displayTagController(_ parentController: UIViewController, tags: [Tag]?,
+                                           blockFinish: @escaping (_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void, blockCancel: (() -> Void)? = nil) {
         let tagController = RRTagController()
         tagController.tags = tags ?? []
         tagController.blockCancel = blockCancel

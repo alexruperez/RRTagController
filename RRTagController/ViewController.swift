@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         let tag = ["Albanie", "Allemagne", "Andorre", "Autriche-Hongrie", "Belgique", "Bulgarie", "Danemark", "Espagne", "France", "Grèce", "Italie", "Liechtenstein", "Luxembourg", "Monaco", "Monténégro", "Norvège", "Pays-Bas", "Portugal", "Roumanie", "Royaume-Uni", "Russie", "Saint-Marin", "Serbie", "Suède", "Suisse"]
 
-        RRTagController.displayTagController(self, tag, blockFinish: { (selectedTags, unSelectedTags) in
+        RRTagController.displayTagController(self, tagsString: tag, blockFinish: { (selectedTags, unSelectedTags) in
 
         }) {
 
