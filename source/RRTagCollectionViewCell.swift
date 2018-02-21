@@ -13,6 +13,11 @@ let RRTagCollectionViewCellIdentifier = "RRTagCollectionViewCellIdentifier"
 public class RRTagCollectionViewCell: UICollectionViewCell {
     
     public var cellSelected: Bool = false
+
+    fileprivate var colorUnselectedTag: UIColor!
+    fileprivate var colorSelectedTag: UIColor!
+    fileprivate var colorTextUnSelectedTag: UIColor!
+    fileprivate var colorTextSelectedTag: UIColor!
     
     public lazy var textContent: UILabel! = {
         let textContent = UILabel(frame: CGRect.zero)
@@ -25,7 +30,11 @@ public class RRTagCollectionViewCell: UICollectionViewCell {
         return textContent
     }()
     
-    public func initContent(_ tag: Tag) {
+    public func initContent(_ tag: Tag, colorUnselectedTag: UIColor, colorSelectedTag: UIColor, colorTextUnSelectedTag: UIColor, colorTextSelectedTag: UIColor) {
+        self.colorUnselectedTag = colorUnselectedTag
+        self.colorSelectedTag = colorSelectedTag
+        self.colorTextUnSelectedTag = colorTextUnSelectedTag
+        self.colorTextSelectedTag = colorTextSelectedTag
         self.contentView.addSubview(textContent)
         textContent.text = tag.textContent
         textContent.sizeToFit()
@@ -53,8 +62,8 @@ public class RRTagCollectionViewCell: UICollectionViewCell {
         self.textContent.frame.size = CGSize(width: self.textContent.frame.size.width - 20, height: self.textContent.frame.size.height - 20)
         self.textContent.frame.origin = CGPoint(x: self.textContent.frame.origin.x + 10, y: self.textContent.frame.origin.y + 10)
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.4, options: [], animations: { () -> Void in
-            self.textContent.layer.backgroundColor = (self.cellSelected == true) ? colorSelectedTag.cgColor : colorUnselectedTag.cgColor
-            self.textContent.textColor = (self.cellSelected == true) ? colorTextSelectedTag : colorTextUnSelectedTag
+            self.textContent.layer.backgroundColor = (self.cellSelected == true) ? self.colorSelectedTag.cgColor : self.colorUnselectedTag.cgColor
+            self.textContent.textColor = (self.cellSelected == true) ? self.colorTextSelectedTag : self.colorTextUnSelectedTag
             self.textContent.frame.size = CGSize(width: self.textContent.frame.size.width + 20, height: self.textContent.frame.size.height + 20)
             self.textContent.center = CGPoint(x: self.contentView.frame.size.width / 2, y: self.contentView.frame.size.height / 2)
         }, completion: nil)

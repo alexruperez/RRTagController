@@ -14,12 +14,6 @@ public struct Tag {
     public var textContent: String
 }
 
-let colorUnselectedTag = UIColor.white
-let colorSelectedTag = UIColor(red:0.22, green:0.7, blue:0.99, alpha:1)
-
-let colorTextUnSelectedTag = UIColor(red:0.33, green:0.33, blue:0.35, alpha:1)
-let colorTextSelectedTag = UIColor.white
-
 public class RRTagController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     public typealias BlockFinish = (_ selectedTags: [Tag], _ unSelectedTags: [Tag]) -> Void
@@ -32,6 +26,11 @@ public class RRTagController: UIViewController, UICollectionViewDelegate, UIColl
     fileprivate var _totalTagsSelected = 0
     fileprivate let addTagView = RRAddTagView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 64))
     fileprivate var heightKeyboard: CGFloat = 0
+
+    fileprivate var colorUnselectedTag = UIColor.white
+    fileprivate var colorSelectedTag = UIColor(red:0.22, green:0.7, blue:0.99, alpha:1)
+    fileprivate var colorTextUnSelectedTag = UIColor(red:0.33, green:0.33, blue:0.35, alpha:1)
+    fileprivate var colorTextSelectedTag = UIColor.white
     
     var blockFinish: BlockFinish!
     var blockCancel: BlockCancel?
@@ -213,7 +212,7 @@ public class RRTagController: UIViewController, UICollectionViewDelegate, UIColl
         
         if indexPath.row < tags.count {
             let currentTag = tags[indexPath.row]
-            cell?.initContent(currentTag)
+            cell?.initContent(currentTag, colorUnselectedTag: colorUnselectedTag, colorSelectedTag: colorSelectedTag, colorTextUnSelectedTag: colorTextUnSelectedTag, colorTextSelectedTag: colorTextSelectedTag)
         } else {
             cell?.initAddButtonContent()
         }
@@ -283,6 +282,10 @@ public class RRTagController: UIViewController, UICollectionViewDelegate, UIColl
     
     public class func displayTagController(_ parentController: UIViewController,
                                            tagsString: [String]?,
+                                           colorUnselectedTag: UIColor? = nil,
+                                           colorSelectedTag: UIColor? = nil,
+                                           colorTextUnSelectedTag: UIColor? = nil,
+                                           colorTextSelectedTag: UIColor? = nil,
                                            blockFinish: @escaping BlockFinish,
                                            blockCancel: BlockCancel?) {
         let tagController = RRTagController()
@@ -292,6 +295,10 @@ public class RRTagController: UIViewController, UICollectionViewDelegate, UIColl
                 tagController.tags.append(Tag(isSelected: false, isLocked: false, textContent: currentTag))
             }
         }
+        tagController.colorUnselectedTag = colorUnselectedTag ?? tagController.colorUnselectedTag
+        tagController.colorSelectedTag = colorSelectedTag ?? tagController.colorSelectedTag
+        tagController.colorTextUnSelectedTag = colorTextUnSelectedTag ?? tagController.colorTextUnSelectedTag
+        tagController.colorTextSelectedTag = colorTextSelectedTag ?? tagController.colorTextSelectedTag
         tagController.blockCancel = blockCancel
         tagController.blockFinish = blockFinish
         parentController.present(tagController, animated: true, completion: nil)
@@ -299,10 +306,18 @@ public class RRTagController: UIViewController, UICollectionViewDelegate, UIColl
 
     public class func displayTagController(_ parentController: UIViewController,
                                            tags: [Tag]?,
+                                           colorUnselectedTag: UIColor? = nil,
+                                           colorSelectedTag: UIColor? = nil,
+                                           colorTextUnSelectedTag: UIColor? = nil,
+                                           colorTextSelectedTag: UIColor? = nil,
                                            blockFinish: @escaping BlockFinish,
                                            blockCancel: BlockCancel?) {
         let tagController = RRTagController()
         tagController.tags = tags ?? []
+        tagController.colorUnselectedTag = colorUnselectedTag ?? tagController.colorUnselectedTag
+        tagController.colorSelectedTag = colorSelectedTag ?? tagController.colorSelectedTag
+        tagController.colorTextUnSelectedTag = colorTextUnSelectedTag ?? tagController.colorTextUnSelectedTag
+        tagController.colorTextSelectedTag = colorTextSelectedTag ?? tagController.colorTextSelectedTag
         tagController.blockCancel = blockCancel
         tagController.blockFinish = blockFinish
         parentController.present(tagController, animated: true, completion: nil)
